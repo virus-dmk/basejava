@@ -2,10 +2,6 @@
  * Array based storage for Resumes
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
 
 public class ArrayStorage {
     private int size = 0;

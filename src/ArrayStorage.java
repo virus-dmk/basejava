@@ -9,7 +9,7 @@ public class ArrayStorage {
     Resume[] storage = new Resume[10000];
 
     void clear() {
-        Arrays.fill(storage, 0, size - 1, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
@@ -33,10 +33,6 @@ public class ArrayStorage {
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-//
-//                for (int j = i; j < size - 1; j++) {
-//                    storage[j] = storage[j + 1];
-//                }
                 System.arraycopy(storage, i + 1, storage, i, size - 1 - i);
                 storage[size - 1] = null;
                 size--;

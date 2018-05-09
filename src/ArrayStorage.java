@@ -22,7 +22,7 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid == uuid) {
                 //System.out.println(storage[i]);
                 return storage[i];
@@ -32,14 +32,15 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int i = 0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].uuid == uuid) {
 
-                for (int j = i; j < size-1; j++) {
+                for (int j = i; j < size - 1; j++) {
                     storage[j] = storage[j + 1];
                 }
                 storage[size - 1] = null;
                 size--;
+                break;
             }
         }
     }

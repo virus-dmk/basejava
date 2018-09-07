@@ -13,72 +13,32 @@ public class ArrayStorage {
         size = 0;
     }
 
-    void update(Resume resume) {
-        if (resumeExists(resume)) {
-
-            System.out.printf("Resume updated!\n\n");
-        }
-    }
-
     void save(Resume r) {
-        if (resumeExists(r)) {
-            return;
+        if (size == storage.length) {
+            System.out.println("Storage is full");
         } else {
-            if (size == storage.length) {
-                System.out.println("Storage is full/n/n");
-            } else {
-
-                storage[size++] = r;
-                System.out.printf("Saved Resume, uuid: %s \n/n", r.uuid);
-            }
+            storage[size++] = r;
         }
-
     }
 
     Resume get(String uuid) {
-        if (resumeExists(uuid)) {
-            for (int i = 0; i < size; i++) {
-                if (storage[i].uuid.equals(uuid)) {
-                    return storage[i];
-                }
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                return storage[i];
             }
         }
         return null;
     }
 
     void delete(String uuid) {
-        if (resumeExists(uuid)) {
-            for (int i = 0; i < size; i++) {
-                if (storage[i].uuid.equals(uuid)) {
-                    System.arraycopy(storage, i + 1, storage, i, size - 1 - i);
-                    storage[size - 1] = null;
-                    size--;
-                    break;
-                }
-            }
-        }
-    }
-
-    boolean resumeExists(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                System.out.printf("Resume exists! \n");
-                return true;
+                System.arraycopy(storage, i + 1, storage, i, size - 1 - i);
+                storage[size - 1] = null;
+                size--;
+                break;
             }
         }
-        System.out.printf("Resume not exists! \n");
-        return false;
-    }
-
-    boolean resumeExists(Resume r) {
-        for (int i = 0; i < size; i++) {
-            if (r.uuid.equals(storage[i].uuid)) {
-                System.out.printf("Resume exists! \n");
-                return true;
-            }
-        }
-        System.out.printf("Resume not exists! \n");
-        return false;
     }
 
     /**

@@ -16,6 +16,7 @@ public class ArrayStorage {
     void update(Resume resume) {
         Integer index = resumeExists(resume.uuid);
         if (index != null) {
+            storage[index]=resume;
             System.out.printf("Resume updated!\n\n");
         } else {
             System.out.printf("Resume not exists\n\n");

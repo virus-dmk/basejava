@@ -13,6 +13,10 @@ public class ArrayStorage {
         size = 0;
     }
 
+    /**
+     *<p>updates object in Resume array with the same resume uuid</p>
+     * @param resume
+     */
     void update(Resume resume) {
         Integer index = resumeExists(resume.uuid);
         if (index != null) {

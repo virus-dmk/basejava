@@ -18,18 +18,18 @@ public class ArrayStorage {
      * @param resume
      */
     void update(Resume resume) {
-        Integer index = resumeExists(resume.uuid);
+        Integer index = getIndex(resume.uuid);
         if (index != null) {
             storage[index]=resume;
-            System.out.printf("Resume updated!\n\n");
+            System.out.println("Resume updated!\n\n");
         } else {
-            System.out.printf("Resume not exists\n\n");
+            System.out.println("Resume not exists\n\n");
         }
     }
 
     void save(Resume resume) {
-        if (resumeExists(resume.uuid) != null) {
-            System.out.printf("Resume already exists \n\n");
+        if (getIndex(resume.uuid) != null) {
+            System.out.println("Resume already exists \n\n");
         } else {
             if (size == storage.length) {
                 System.out.println("Storage is full\n\n");
@@ -41,17 +41,17 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        Integer index = resumeExists(uuid);
+        Integer index = getIndex(uuid);
         if (index != null) {
             return storage[index];
         } else {
-            System.out.printf("Resume not exists\n\n");
+            System.out.println("Resume not exists\n\n");
             return null;
         }
     }
 
     void delete(String uuid) {
-        Integer index = resumeExists(uuid);
+        Integer index = getIndex(uuid);
         if (index != null) {
             storage[index] = storage[size - 1];
             storage[size - 1] = null;
@@ -64,7 +64,7 @@ public class ArrayStorage {
      * @return if exist, return index of object in Resume massive,
      * else return null
      */
-    Integer resumeExists(String uuid) {
+    Integer getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 return i;

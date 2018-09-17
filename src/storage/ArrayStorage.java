@@ -22,22 +22,22 @@ public class ArrayStorage extends AbstractArrayStorage {
     public void update(Resume resume) {
         Integer index = getIndex(resume.getUuid());
         if (index == null) {
-            System.out.println("model.Resume not exists\n\n");
+            System.out.println("Resume not exists\n\n");
         } else {
             storage[index] = resume;
-            System.out.println("model.Resume updated!\n\n");
+            System.out.println("Resume updated!\n\n");
         }
     }
 
     public void save(Resume resume) {
         if (getIndex(resume.getUuid()) != null) {
-            System.out.println("model.Resume already exists \n\n");
+            System.out.println("Resume already exists \n\n");
         } else {
             if (size >= STORAGE_LIMIT) {
                 System.out.println("Storage is full\n\n");
             } else {
                 storage[size++] = resume;
-                System.out.printf("model.Resume saved, uuid: %s \n", resume.getUuid());
+                System.out.printf("Resume saved, uuid: %s \n", resume.getUuid());
             }
         }
     }

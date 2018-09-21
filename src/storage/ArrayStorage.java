@@ -19,45 +19,15 @@ public class ArrayStorage extends AbstractArrayStorage {
      *
      * @param resume
      */
-    public void update(Resume resume) {
-        Integer index = getIndex(resume.getUuid());
-        if (index == null) {
-            System.out.println("Resume not exists\n\n");
-        } else {
-            storage[index] = resume;
-            System.out.println("Resume updated!\n\n");
-        }
+
+    public void save0(Resume resume) {
+        storage[size++] = resume;
     }
 
-    public void save(Resume resume) {
-        if (getIndex(resume.getUuid()) != null) {
-            System.out.println("Resume already exists \n\n");
-        } else {
-            if (size >= STORAGE_LIMIT) {
-                System.out.println("Storage is full\n\n");
-            } else {
-                storage[size++] = resume;
-                System.out.printf("Resume saved, uuid: %s \n", resume.getUuid());
-            }
-        }
-    }
-
-    public void delete(String uuid) {
-        Integer index = getIndex(uuid);
-        if (index != null) {
-            storage[index] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
-        } else {
-            System.out.println("model.Resume not exist \n\n");
-        }
-    }
-
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    public void delete0(String uuid) {
+        storage[getIndex(uuid)] = storage[size - 1];
+        storage[size - 1] = null;
+        size--;
     }
 
     /**
@@ -65,12 +35,12 @@ public class ArrayStorage extends AbstractArrayStorage {
      * @return if exist, return index of object in model.Resume massive,
      * else return null
      */
-    protected Integer getIndex(String uuid) {
+    protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
             }
         }
-        return null;
+        return -1;
     }
 }

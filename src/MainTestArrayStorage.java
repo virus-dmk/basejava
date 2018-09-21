@@ -7,8 +7,7 @@ import storage.SortedArrayStorage;
  * Test for com.urise.webapp.storage.storage.ArrayStorage
  */
 public class MainTestArrayStorage {
-    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
-    static final AbstractArrayStorage SARRAY_STORAGE = new SortedArrayStorage();
+    static final AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
@@ -28,24 +27,24 @@ public class MainTestArrayStorage {
         r7.setUuid("uuid7");
 
 
-        SARRAY_STORAGE.save(r1);
-        SARRAY_STORAGE.save(r2);
-        SARRAY_STORAGE.save(r3);
-        SARRAY_STORAGE.save(r4);
-        SARRAY_STORAGE.save(r5);
-        SARRAY_STORAGE.save(r6);
+        ARRAY_STORAGE.save(r1);
+        ARRAY_STORAGE.save(r2);
+        ARRAY_STORAGE.save(r3);
+        ARRAY_STORAGE.save(r4);
+        ARRAY_STORAGE.save(r5);
+        ARRAY_STORAGE.save(r6);
         printAll();
 
-        SARRAY_STORAGE.getAll();
+        ARRAY_STORAGE.getAll();
 
-        SARRAY_STORAGE.update(r1);
-        SARRAY_STORAGE.update(r7);
-        SARRAY_STORAGE.delete("uuid5");
-        SARRAY_STORAGE.delete("uuid1");
+        ARRAY_STORAGE.update(r1);
+        ARRAY_STORAGE.update(r7);
+        ARRAY_STORAGE.delete("uuid5");
+        ARRAY_STORAGE.delete("uuid1");
 
         printAll();
 
-        SARRAY_STORAGE.clear();
+        ARRAY_STORAGE.clear();
         printAll();
 
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
@@ -64,6 +63,6 @@ public class MainTestArrayStorage {
         for (Resume r : ARRAY_STORAGE.getAll()) {
             System.out.println(r);
         }
-        System.out.println("Size: " + SARRAY_STORAGE.size());
+        System.out.println("Size: " + ARRAY_STORAGE.size());
     }
 }

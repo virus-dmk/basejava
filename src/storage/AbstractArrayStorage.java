@@ -25,45 +25,42 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOf(storage, size);
     }
 
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
         if (index < 0) {
             System.out.println("Resume not exists ");
         } else {
-            storage[index] = r;
+            storage[index] = resume;
             System.out.println("Resume updated | uuid: " + index + " \n");
         }
     }
 
-    public void save(Resume r) {
+    public void save(Resume resume) {
 
-        if (size == 0) {
-            storage[size++] = r;
-            System.out.println("Resume added | uuid: " + r.getUuid());
-            System.out.println("Insertion place: " + (size - 1));
-        } else if (size >= STORAGE_LIMIT) {
+        if (size >= STORAGE_LIMIT) {
             System.out.println("Storage is full! ");
-        } else if (getIndex(r.getUuid()) >= 0) {
+        } else if (getIndex(resume.getUuid()) >= 0) {
             System.out.println("Resume with that uuid already exists! ");
         } else {
-            this.save0(r);
-            System.out.println("Resume added | uuid: " + r.getUuid());
+            this.doSave(resume);
+            size++;
+            System.out.println("Resume added | uuid: " + resume.getUuid());
         }
     }
 
     public void delete(String uuid) {
-        if (size == 0) {
-            System.out.println("Storage empty ");
-        } else if (getIndex(uuid) < 0) {
+        int index = getIndex(uuid);
+        if (index < 0) {
             System.out.println("Resume not exists");
         } else {
-            this.delete0(uuid);
+            doDelete(index);
+            size--;
             System.out.println("Resume deleted ");
         }
     }
 
     public Resume get(String uuid) {
-        Integer index = getIndex(uuid);
+        int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("Resume " + uuid + " not exist");
             return null;
@@ -73,7 +70,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract int getIndex(String uuid);
 
-    public abstract void delete0(String uuid);
+    public abstract void doDelete(int delIndex);
 
-    public abstract void save0(Resume r);
+    public abstract void doSave(Resume r);
 }

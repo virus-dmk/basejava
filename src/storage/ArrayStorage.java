@@ -5,14 +5,7 @@ package storage;
 
 import model.Resume;
 
-import java.util.Arrays;
-
 public class ArrayStorage extends AbstractArrayStorage {
-
-    public void clear() {
-        Arrays.fill(storage, 0, size, null);
-        size = 0;
-    }
 
     /**
      * <p>updates object in model.Resume array with the same resume uuid</p>
@@ -20,14 +13,13 @@ public class ArrayStorage extends AbstractArrayStorage {
      * @param resume
      */
 
-    public void save0(Resume resume) {
-        storage[size++] = resume;
+    public void doSave(Resume resume) {
+        storage[size] = resume;
     }
 
-    public void delete0(String uuid) {
-        storage[getIndex(uuid)] = storage[size - 1];
+    public void doDelete(int delIndex) {
+        storage[delIndex] = storage[size - 1];
         storage[size - 1] = null;
-        size--;
     }
 
     /**

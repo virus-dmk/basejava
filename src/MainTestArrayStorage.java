@@ -1,6 +1,5 @@
 import model.Resume;
 import storage.AbstractArrayStorage;
-import storage.ArrayStorage;
 import storage.SortedArrayStorage;
 
 /**
@@ -60,8 +59,8 @@ public class MainTestArrayStorage {
 
     static void printAll() {
         System.out.println("\nGet All");
-        for (Resume r : ARRAY_STORAGE.getAll()) {
-            System.out.println(r);
+        for (Resume resume : ARRAY_STORAGE.getAll()) {
+            System.out.println(resume);
         }
         System.out.println("Size: " + ARRAY_STORAGE.size());
     }

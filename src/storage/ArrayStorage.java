@@ -13,12 +13,12 @@ public class ArrayStorage extends AbstractArrayStorage {
      * @param resume
      */
 
-    public void doSave(Resume resume) {
+    public void doSave(Resume resume, int index) {
         storage[size] = resume;
     }
 
-    public void doDelete(int delIndex) {
-        storage[delIndex] = storage[size - 1];
+    public void doDelete(int index) {
+        storage[index] = storage[size - 1];
         storage[size - 1] = null;
     }
 

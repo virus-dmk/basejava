@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Objects;
-
 /**
  * com.urise.webapp.model.model.Resume class
  */
@@ -28,7 +26,6 @@ public class Resume implements Comparable<Resume> {
 
     @Override
     public int hashCode() {
-
         return uuid.hashCode();
     }
 

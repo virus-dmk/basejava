@@ -13,7 +13,7 @@ public class MainReflection {
         System.out.println(field.get(r));
         field.set(r, "new_uuid");
 
-        Class rClass = Resume.class;
+        Class<Resume> rClass = Resume.class;
         Method method = rClass.getMethod("toString");
         Object output = method.invoke(r);
         System.out.println(output);

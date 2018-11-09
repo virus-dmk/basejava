@@ -3,18 +3,11 @@ package storage;
 import model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
-
-    /**
-     * <p>updates object in model.Resume array with the same resume uuid</p>
-     *
-     * @param resume
-     */
-
-    public void doSave(Resume resume, int index) {
+    public void elementSave(Resume resume, int index) {
         storage[size] = resume;
     }
 
-    public void doDelete(int index) {
+    public void deleteElement(int index) {
         storage[index] = storage[size - 1];
     }
 
@@ -23,7 +16,7 @@ public class ArrayStorage extends AbstractArrayStorage {
      * @return if exist, return index of object in model.Resume massive,
      * else return null
      */
-    protected int getIndex(String uuid) {
+    protected Integer getSearchKey(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;

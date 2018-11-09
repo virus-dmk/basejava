@@ -1,16 +1,20 @@
 package storage;
 
-import exception.ExistStorageException;
-import exception.NotExistStorageException;
 import exception.StorageException;
 import model.Resume;
 
 import java.util.Arrays;
 
-public abstract class AbstractArrayStorage implements Storage {
+public abstract class AbstractArrayStorage extends AbstractStorage {
     protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
+
+    //protected abstract Integer getSearchKey(String uuid);
+
+    public abstract void deleteElement(int index);
+
+    public abstract void elementSave(Resume resume, int index);
 
     public int size() {
         return size;
@@ -28,52 +32,35 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOf(storage, size);
     }
 
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            storage[index] = resume;
-            System.out.println("Resume updated | uuid: " + index + " \n");
-        }
+    @Override
+    protected void doUpdate(Resume resume, Object index) {
+        storage[(Integer) index] = resume;
     }
 
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
+    @Override
+    public void doSave(Resume resume, Object index) {
         if (size >= STORAGE_LIMIT) {
             throw new StorageException("Storage overflow ", resume.getUuid());
-        } else if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
         } else {
-            doSave(resume, -(index) - 1);
+            elementSave(resume, -((Integer) index) - 1);
             size++;
-            System.out.println("Resume added | uuid: " + resume.getUuid());
         }
     }
 
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        } else {
-            doDelete(index);
-            storage[size - 1] = null;
-            size--;
-            System.out.println("Resume deleted ");
-        }
+    @Override
+    public void doDelete(Object index) {
+        deleteElement((Integer) index);
+        storage[size - 1] = null;
+        size--;
     }
 
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return storage[index];
+    @Override
+    protected Resume doGet(Object index) {
+        return storage[(Integer) index];
     }
 
-    protected abstract int getIndex(String uuid);
-
-    public abstract void doDelete(int index);
-
-    public abstract void doSave(Resume resume, int index);
+    @Override
+    protected boolean isExist(Object index) {
+        return (Integer) index >= 0;
+    }
 }

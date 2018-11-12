@@ -25,7 +25,8 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected Object getSearchKey(String uuid) {
-        return hashMap.get(uuid);
+        Resume r = hashMap.get(uuid);
+        return r == null ? null : uuid;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class MapStorage extends AbstractStorage {
     @Override
     public Resume[] getAll() {
         Collection<Resume> resumes = hashMap.values();
-        return resumes.toArray(new Resume[0]);
+        return resumes.toArray(new Resume[hashMap.size()]);
     }
 
     @Override

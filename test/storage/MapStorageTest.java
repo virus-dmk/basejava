@@ -10,15 +10,17 @@ import static org.junit.Assert.assertEquals;
 
 public class MapStorageTest extends AbstractStorageTest {
     private static Storage storage = new MapStorage();
+
     public MapStorageTest() {
         super(storage);
     }
 
     @Test
+    @Override
     public void getAll() {
         Resume[] resResumes = storage.getAll();
         Arrays.sort(resResumes);
         assertEquals(3, resResumes.length);
-        assertArrayEquals(new Resume[]{new Resume("uuid1"), new Resume("uuid2"), new Resume("uuid3")},resResumes);
+        assertArrayEquals(new Resume[]{new Resume("uuid1"), new Resume("uuid2"), new Resume("uuid3")}, resResumes);
     }
 }

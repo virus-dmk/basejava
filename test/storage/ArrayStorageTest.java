@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class ArrayStorageTest extends AbstractStorageTest {
     private static Storage storage = new ArrayStorage();
+
     public ArrayStorageTest() {
         super(storage);
     }

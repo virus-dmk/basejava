@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
-    private static Map<String, Resume> hashMap = new HashMap<>();
+    private Map<String, Resume> hashMap = new HashMap<>();
 
     @Override
     protected void doUpdate(Resume resume, Object searchKey) {
@@ -20,13 +20,13 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return searchKey != null;
+        Resume r = hashMap.get(searchKey);
+        return r != null;
     }
 
     @Override
     protected Object getSearchKey(String uuid) {
-        Resume r = hashMap.get(uuid);
-        return r == null ? null : uuid;
+        return uuid;
     }
 
     @Override
